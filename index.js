@@ -26,7 +26,6 @@ function processarCadastroUsuario(requisicao, resposta){
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
             <style>
             body {
-                background-color: #adaeaf;
                 background-image: url(fundoanimal.jpg);
                 display: flex;
                 align-items: center;
@@ -35,7 +34,7 @@ function processarCadastroUsuario(requisicao, resposta){
             }
         
             .container {
-                background-color: #585d63fa;
+                background-color: white;
                 border-radius: 8px;
                 border: 2px solid black;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -120,7 +119,7 @@ function processarCadastroUsuario(requisicao, resposta){
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <style>
                 body {
-                    background-color: #adaeaf;
+                    background-image: url(fundoanimal.jpg);
                     display: flex;
                     align-items: center;
                     height: 100vh;
@@ -240,7 +239,6 @@ function processarCadastroPet(requisicao, resposta){
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
             <style>
             body {
-                background-color: #adaeaf;
                 background-image: url(fundoanimal.jpg);
                 display: flex;
                 align-items: center;
@@ -334,7 +332,7 @@ function processarCadastroPet(requisicao, resposta){
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <style>
                 body {
-                    background-color: #adaeaf;
+                    background-image: url(fundoanimal.jpg);
                     display: flex;
                     align-items: center;
                     height: 100vh;
@@ -388,14 +386,6 @@ function processarCadastroPet(requisicao, resposta){
                     background-color: #f0f0f0;
                 }
 
-                @media (max-width: 767px) {
-                    .btn-success,
-                    .btn-danger {
-                        width: 100%;
-                        float: none;
-                    }
-                }
-
             </style>
         </head>
 
@@ -441,10 +431,10 @@ function processarCadastroPet(requisicao, resposta){
 
 
 function processarAdocao(requisicao, resposta){
-    const users = requisicao.body;
+    const dados = requisicao.body;
     let conteudoResposta = '';
 
-    if(!(users.name && users.pet))
+    if(!(dados.name && dados.pet))
     {
         conteudoResposta=`
         <!DOCTYPE html>
@@ -456,7 +446,6 @@ function processarAdocao(requisicao, resposta){
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
             <style>
                 body {
-                    background-color: #adaeaf;
                     background-image: url(fundoanimal.jpg);
                     display: flex;
                     align-items: center;
@@ -465,13 +454,14 @@ function processarAdocao(requisicao, resposta){
                 }
         
                 .container {
-                    width: 70%; /* Ajuste a largura conforme necessário */
-                    margin: auto; /* Para centralizar a div na tela */
-                    background-color: #585d63fa;
+                    width: 70%;
+                    margin: auto;
+                    background-color: white;
                     border-radius: 8px;
                     border: 2px solid black;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                     padding: 20px;
+                    align-items: center;
                 }
         
                 label { 
@@ -506,8 +496,6 @@ function processarAdocao(requisicao, resposta){
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome do Interessado</label>
                     <select class="form-select" id="name" name="name" required>
-                        <option selected disabled value="Escolha um usuario...">Escolha um interessado...</option>
-            
         `;
         
         for (const usuario of listaUsuarios) {
@@ -516,7 +504,7 @@ function processarAdocao(requisicao, resposta){
 
         conteudoResposta += `
                     </select>
-                    ${!users.name ? `<p class="text-danger">Por favor, informe um nome</p>` : ''}
+                    ${!dados.name ? `<p class="text-danger">Por favor, informe um nome</p>` : ''}
                 </div>
             </div>
         `;
@@ -526,8 +514,6 @@ function processarAdocao(requisicao, resposta){
                         <div class="mb-3">
                             <label for="pet" class="form-label">Nome do Pet</label>
                             <select class="form-select" id="pet" name="pet" required>
-                            <option selected disabled value="">Escolha um pet...</option>
-
         `;
         for (const usuariopet of listaPets) {
             conteudoResposta += `<option value="${usuariopet.nome}">${usuariopet.nome}</option>`;
@@ -535,7 +521,7 @@ function processarAdocao(requisicao, resposta){
         
         conteudoResposta += `
                         </select>    
-                        ${!users.pet ? `<p class="text-danger">Por favor, informe um pet a ser adotado!</p>` : ''}
+                        ${!dados.pet ? `<p class="text-danger">Por favor, informe um pet a ser adotado!</p>` : ''}
                         </div>
                 </div>
         `;
@@ -557,13 +543,11 @@ function processarAdocao(requisicao, resposta){
     }
     else {
         const usuarios = {
-            name: users.name,
-            pet: users.pet,
+            name: dados.name,
+            pet: dados.pet,
             dataHora: new Date(), // Adiciona a data e hora atual
         };
         listaAdocao.push(usuarios);
-    
-       
 
         conteudoResposta = `
         <!DOCTYPE html>
@@ -576,7 +560,6 @@ function processarAdocao(requisicao, resposta){
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
             <style>
                 body {
-                    background-color: #adaeaf;
                     background-image: url(fundoanimal.png);
                     display: flex;
                     align-items: center;
@@ -622,21 +605,12 @@ function processarAdocao(requisicao, resposta){
                 th {
                     background-color: #2868a7;
                 }
-    
-                @media (max-width: 767px) {
-                    .btn-success,
-                    .btn-danger {
-                        width: 100%;
-                        float: none;
-                    }
-                }
-    
             </style>
         </head>
     
         <body>
             <div class="container col-md-8" style="padding: 20px;">
-                <h1 class="text-center" style="font-weight: 700;color: black;">Lista Adoção Pet</span></h1>
+                <h1 class="text-center" style="font-weight: 700;color: black;">Lista Adoção Pet</h1>
                 <div style="border-radius: 5px;"> 
                     <table class="table table-striped table-hover mt-2 mx-auto my-auto">
                         <thead>
@@ -646,8 +620,7 @@ function processarAdocao(requisicao, resposta){
                                 <th>Solicitado em:</th>
                             </tr>
                         </thead>
-                        <tbody>
-    `;
+                        <tbody> `;
     
     for (const usuario of listaAdocao) {
         const dataHoraFormatada = usuario.dataHora.toLocaleString(); // Formata a data e hora
@@ -688,22 +661,20 @@ function autenticar(requisicao, resposta, next){
 
 
 const app = express();
-// ativando a funcionalidade de manipular cookies
+
 app.use(cookieParser());
 
-//adicionar uma nova capacidade para essa aplicação: Memorizar com quem o servidor está falando
-//durante o uso do sistem, a apliacação saberá, dentro de uma sessão valida com quem ela se comunica
+
 app.use(session({
     secret: "M1nH4Ch4v3S3cR3t4",
-    resave: true, //atualiza a sessão mesmo que não há alterações a cada requisição
+    resave: true, 
     saveUninitialized: true,
     cookie: {
-        //tempo de vida da sessão
-        maxAge: 1000 * 60 * 30 // 30 minutos
+        maxAge: 1000 * 60 * 30 //tempo de vida da sessão
     }
 }));
 
-//ativar a extensão que manipula requisições
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(process.cwd(),'paginas')));
@@ -726,8 +697,7 @@ app.get('/',autenticar, (requisicao, resposta) =>{
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
             <style>
                 body {
-                    background-color: #adaeaf;
-                    background-image: url(background-batepapo.png);
+                    background-image: url(fundoanimal.png);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -735,7 +705,7 @@ app.get('/',autenticar, (requisicao, resposta) =>{
                     margin: 0;
                 }
                 .container {
-                    background-color: #585d63fa;
+                    background-image: url(fundoanimal.png);
                     border-radius: 8px;
                     border: 2px solid black;
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -751,15 +721,15 @@ app.get('/',autenticar, (requisicao, resposta) =>{
                     font-size: 16px;
                 }
                 .custom-button {
-                    font-size: 1.5em; /* Utilizando uma unidade relativa (em) para o tamanho do texto */
-                    padding: 3% 32%; /* Utilizando porcentagens para o padding */
+                    font-size: 1.5em;
+                    padding: 10px;
+                    width: 400px;
+                    align-items: center;
                     text-decoration: none;
                     border: 2px solid #28a745;
                     border-radius: 8px;
-                    color: #28a745;
                     background-color: #ffffff;
-                    display: inline-block; 
-                    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+                    display: inline-block;
                 }
                 .custom-button:hover {
                     background-color: #28a745;
@@ -792,7 +762,7 @@ app.get('/',autenticar, (requisicao, resposta) =>{
 
         `);
 });
-//endopoint login que irá processar o login da aplicação
+
 app.post('/login' , (requisicao, resposta)=>{
     const usuario = requisicao.body.usuario;
     const senha = requisicao.body.senha;
@@ -825,7 +795,9 @@ app.post('/login' , (requisicao, resposta)=>{
 
 app.post('/cadastrarUsuario',autenticar, processarCadastroUsuario);
 app.post('/cadastrarPet',autenticar, processarCadastroPet);
-app.post('/adotarPet', processarAdocao);
+app.post('/adotarPet',autenticar, processarAdocao);
+
+
 
 app.listen(porta, host, () => {
     console.log(`Servidor executando na url https://${host}:${porta}`)
