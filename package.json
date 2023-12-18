@@ -1,0 +1,29 @@
+{
+  "name": "trabexameppi",
+  "version": "1.0.0",
+  "description": "Sistema web para o controle de adoção",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Isabella-Santander/TrabExamePPI.git"
+  },
+  "keywords": [
+    "POST"
+  ],
+  "author": "Isabella Santander de Souza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Isabella-Santander/TrabExamePPI/issues"
+  },
+  "homepage": "https://github.com/Isabella-Santander/TrabExamePPI#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3"
+  }
+}
