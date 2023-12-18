@@ -540,10 +540,10 @@ function processarAdocao(requisicao, resposta){
                 </div>
         `;
         
-        `
+        conteudoResposta += `
                 <div class="col-12 mt-3">
                             <button class="btn btn-success" type="submit">Enviar</button>
-                            <a class="btn btn-danger" href="/" role="button">Voltar</a>
+                            
                 </div>
                     
                 </form>
@@ -649,12 +649,12 @@ function processarAdocao(requisicao, resposta){
                         <tbody>
     `;
     
-    for (const usuarios of listaAdocao) {
-        const dataHoraFormatada = usuarios.dataHora.toLocaleString(); // Formata a data e hora
+    for (const usuario of listaAdocao) {
+        const dataHoraFormatada = usuario.dataHora.toLocaleString(); // Formata a data e hora
         conteudoResposta += `
             <tr style="background-color: #585d63fa">
-                <td>${usuarios.nome}</td>
-                <td>${usuarios.pet}</td>
+                <td>${usuario.nome}</td>
+                <td>${usuario.pet}</td>
                 <td>${dataHoraFormatada}</td> <!-- Adiciona a coluna de data e hora -->
             </tr>
         `;
