@@ -801,8 +801,8 @@ app.post('/login' , (requisicao, resposta)=>{
         }
 }); 
 
-app.post('/cadastrarUsuario',autenticar, processarCadastroUsuario);
-app.post('/cadastrarPet',autenticar, processarCadastroPet);
+app.post('/cadastrarUsuario', processarCadastroUsuario);
+app.post('/cadastrarPet', processarCadastroPet);
 app.post('/adotarpet', processarAdocao);
 
 
