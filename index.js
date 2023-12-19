@@ -491,7 +491,7 @@ function processarAdocao(requisicao, resposta){
         <body>
             <div class="container">
                 <h1 class="" style="font-weight: 700;color: black;">Adotar um Pet</h1>
-                <form action="/adotarPet" method="POST" class="row g-3 needs-validation mx-auto my-auto" novalidate>
+                <form action="/adotarpet" method="POST" class="row g-3 needs-validation mx-auto my-auto" novalidate>
                 <div class="col-md-4">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome do Interessado</label>
@@ -753,7 +753,7 @@ app.get('/',autenticar, (requisicao, resposta) =>{
                         <p><a href="/cadastroPet.html" class="custom-button">Cadastro de Pets</a></p>
                     </div>
                     <div class="col-md-12">
-                        <p><a href="/adotarPet.html" class="custom-button">Adotar um Pet</a></p>
+                        <p><a href="/adotarpet.html" class="custom-button">Adotar um Pet</a></p>
                     </div>
                     <footer>
                         <p style="font-size: 16px;">Seu último acesso foi em <strong>${dataUltimoAcesso}</strong></p>
@@ -803,7 +803,7 @@ app.post('/login' , (requisicao, resposta)=>{
 
 app.post('/cadastrarUsuario',autenticar, processarCadastroUsuario);
 app.post('/cadastrarPet',autenticar, processarCadastroPet);
-app.post('/adotarPet', processarAdocao);
+app.post('/adotarpet', processarAdocao);
 
 
 
