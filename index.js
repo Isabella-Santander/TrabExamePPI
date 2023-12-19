@@ -674,10 +674,10 @@ app.use(cookieParser());
 
 app.use(session({
     secret: "M1nH4Ch4v3S3cR3t4",
-    resave: true, 
-    saveUninitialized: true,
+    resave: false, 
+    saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 30 //tempo de vida da sessão
+        maxAge: 30 * 60 * 1000 //tempo de vida da sessão
     }
 }));
 
@@ -777,10 +777,7 @@ app.post('/login' , (requisicao, resposta)=>{
 
         if(usuario && senha && (usuario === 'isabella') && (senha === '123')){
             requisicao.session.usuarioAutenticado = true;
-            resposta.cookie('NomeUsuario', usuario, {
-                maxAge: 1800000,   //faz com que o login tenha validade de 30 minutos
-                httpOnly: true
-            });
+
             resposta.redirect('/');
         }
         else{
