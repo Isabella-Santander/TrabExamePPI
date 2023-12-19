@@ -653,15 +653,19 @@ function processarAdocao(requisicao, resposta){
     }
 }
 
-function autenticar(requisicao, resposta, next){
-    if(requisicao.session.usuarioAutenticado){
-        next();
-    }
-    else{
-        resposta.redirect("/login.html");
+function autenticar(requisicao, resposta, next) {
+    const rotasSemAutenticacao = ['/cadastrarUsuario', '/cadastrarPet']; 
+
+    if (rotasSemAutenticacao.includes(requisicao.path)) {
+        next(); 
+    } else {
+        if (requisicao.session.usuarioAutenticado) {
+            next();
+        } else {
+            resposta.redirect("/login.html");
+        }
     }
 }
-
 
 const app = express();
 
@@ -801,8 +805,8 @@ app.post('/login' , (requisicao, resposta)=>{
         }
 }); 
 
-app.post('/cadastrarUsuario', processarCadastroUsuario);
-app.post('/cadastrarPet', processarCadastroPet);
+app.post('/cadastrarUsuario',autenticar, processarCadastroUsuario);
+app.post('/cadastrarPet',autenticar, processarCadastroPet);
 app.post('/adotarpet', processarAdocao);
 
 
