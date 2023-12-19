@@ -654,7 +654,7 @@ function processarAdocao(requisicao, resposta){
 }
 
 function autenticar(requisicao, resposta, next) {
-    const rotasSemAutenticacao = ['/cadastrarUsuario', '/cadastrarPet']; 
+    const rotasSemAutenticacao = ['/cadastrarUsuario', '/cadastrarPet', '/adotarpet']; 
 
     if (rotasSemAutenticacao.includes(requisicao.path)) {
         next(); 
