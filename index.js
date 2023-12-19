@@ -491,11 +491,12 @@ function processarAdocao(requisicao, resposta){
         <body>
             <div class="container">
                 <h1 class="" style="font-weight: 700;color: black;">Adotar um Pet</h1>
-                <form action='/cadastrarPet' method="POST" class="row g-3 needs-validation mx-auto my-auto" novalidate>
+                <form action='/adotarPet' method="POST" class="row g-3 needs-validation mx-auto my-auto" novalidate>
                 <div class="col-md-4">
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome do Interessado</label>
                     <select class="form-select" id="name" name="name" required>
+                    <option selected disabled value="">Escolha um interessado...</option>
         `;
         
         for (const usuario of listaUsuarios) {
@@ -504,7 +505,7 @@ function processarAdocao(requisicao, resposta){
 
         conteudoResposta += `
                     </select>
-                    ${!dados.name ? `<p class="text-danger">Por favor, informe um nome</p>` : ''}
+                    ${!dados.name ? `<p class="text-danger">Por favor, informe um nome!</p>` : ''}
                 </div>
             </div>
         `;
@@ -514,6 +515,7 @@ function processarAdocao(requisicao, resposta){
                         <div class="mb-3">
                             <label for="pet" class="form-label">Nome do Pet</label>
                             <select class="form-select" id="pet" name="pet" required>
+                            <option selected disabled value="">Escolha um pet...</option>
         `;
         for (const usuariopet of listaPets) {
             conteudoResposta += `<option value="${usuariopet.nome}">${usuariopet.nome}</option>`;
@@ -529,6 +531,7 @@ function processarAdocao(requisicao, resposta){
         conteudoResposta += `
                 <div class="col-12 mt-3">
                             <button class="btn btn-success" type="submit">Enviar</button>
+                            <a class="btn btn-danger" href="/" role="button">Voltar</a>
                             
                 </div>
                     
@@ -626,7 +629,7 @@ function processarAdocao(requisicao, resposta){
         const dataHoraFormatada = usuario.dataHora.toLocaleString(); // Formata a data e hora
         conteudoResposta += `
             <tr style="background-color: #585d63fa">
-                <td>${usuario.nome}</td>
+                <td>${usuario.name}</td>
                 <td>${usuario.pet}</td>
                 <td>${dataHoraFormatada}</td> <!-- Adiciona a coluna de data e hora -->
             </tr>
@@ -697,7 +700,7 @@ app.get('/',autenticar, (requisicao, resposta) =>{
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
             <style>
                 body {
-                    background-image: url(fundoanimal.png);
+                    background-image: url(paginas/fundoanimal.png);
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -712,6 +715,7 @@ app.get('/',autenticar, (requisicao, resposta) =>{
                     padding: 20px;
                     max-width: 700px; 
                     width: 100%;
+                    align-items: center;
                 }
                 label { 
                     font-weight: 800; 
@@ -769,6 +773,10 @@ app.post('/login' , (requisicao, resposta)=>{
 
         if(usuario && senha && (usuario === 'isabella') && (senha === '123')){
             requisicao.session.usuarioAutenticado = true;
+            resposta.cookie('NomeUsuario', usuario, {
+                maxAge: 1800000,   //faz com que o login tenha validade de 30 minutos
+                httpOnly: true
+            });
             resposta.redirect('/');
         }
         else{
@@ -795,7 +803,7 @@ app.post('/login' , (requisicao, resposta)=>{
 
 app.post('/cadastrarUsuario',autenticar, processarCadastroUsuario);
 app.post('/cadastrarPet',autenticar, processarCadastroPet);
-app.post('/adotarPet',autenticar, processarAdocao);
+app.post('/adotarPet', processarAdocao);
 
 
 
